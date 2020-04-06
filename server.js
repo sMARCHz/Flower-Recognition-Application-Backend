@@ -19,7 +19,7 @@ app.post('/upimg', mulConfig.uploadImg, async (req, res) => {
     }
     const item = new dbModel({
         userid: req.body.uid,
-        path: req.body.path
+        path: '/public'+ req.body.filename
     });
     item.img.data = req.file.buffer;
     item.img.contentType = "image/jpg";
