@@ -46,7 +46,6 @@ app.get('/getimg/:id', async (req,res)=>{
 })
 
 app.get('/getimg', async (req,res)=>{
-    const {id} = req.params.id;
     const all = await dbModel.find({});
     res.send(all);
 })
