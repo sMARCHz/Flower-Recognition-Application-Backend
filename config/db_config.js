@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-//const db = 'mongodb://127.0.0.1:27017/';
-const db = process.env.MongoDB_URL;
+const db = 'mongodb://127.0.0.1:27017/';
+//const db = process.env.MongoDB_URL;
 const connectDB = async () => {
     try {
       await mongoose.connect(db, {
