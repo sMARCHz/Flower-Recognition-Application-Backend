@@ -22,7 +22,7 @@ app.post('/upimg', mulConfig.uploadImg, async (req, res) => {
     });
     item.img.data = req.file.buffer;
     item.img.contentType = "image/jpg";
-    item.img.uri = '/public/Image-'+ Date.now() + req.body.filename;
+    item.img.uri = '/public/Image-'+ Date.now() + req.file.filename;
 
     console.log('path',req.body.path);
     console.log('id',req.body.uid);
