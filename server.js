@@ -41,15 +41,14 @@ app.post('/upimg', mulConfig.uploadImg, async (req, res) => {
 app.get('/getimg/:id', async (req,res)=>{
     const {id} = req.params.id;
     const product = await dbModel.findOne({'userid': id});
-    const all = await dbModel.find();
-    try{
-        res.send('product',product);
-        res.send(all);
-        //res.send(product[0]['path']);
-    }
-    catch(err){
-        res.status(500).send(err)
-    }
+    //res.send(product[0]['path']);
+    res.send(product);
+})
+
+app.get('/getimg', async (req,res)=>{
+    const {id} = req.params.id;
+    const all = await dbModel.find({});
+    res.send(all);
 })
 
 app.get('/', function(req,res){
