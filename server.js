@@ -42,6 +42,7 @@ app.get('/getimg', async (req,res)=>{
     //const {id} = req.params.id;
     const product = await dbModel.find({});
     try{
+        res.json(product);
         res.send(product['path']);
     }
     catch(err){
