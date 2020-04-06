@@ -51,7 +51,7 @@ app.post('/uppred',async (req,res) => {
     }
     finally{
         console.log('Upload successful');
-        return res.status(201).send('Upload successful');
+        return res.sendStatus(201).end();
     }
 })
 
