@@ -1,11 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const fs = require("fs");
 const mulConfig = require('./config/multer_config');
 const connectDB = require("./config/db_config");
 const dbModel = require('./config/db_model');
 const app = express();
 const port = process.env.PORT || 5000;
+
+const test = {
+    img: {
+        data: 'asdfadf',
+        contentType: 'image/jpg'
+    },
+    path: ';kj;j;kkj'
+}
 
 connectDB();
 app.use(bodyParser.json());
@@ -43,7 +50,8 @@ app.get('/getimg', async (req,res)=>{
     //const {id} = req.params.id;
     const product = await dbModel.find({});
     try{
-        res.send(product[img][path]);
+        //res.send(product[img]);
+        res.send(test['path']);
     }
     catch(err){
         res.status(500).send(err)
