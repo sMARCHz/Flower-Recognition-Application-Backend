@@ -2,17 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 const productSchema = new Schema({
     img: { 
-        data: Buffer, contentType: String 
+        data: Buffer, contentType: String, uri:  String
     },
     userid: {
         type: Number,
         trim: true,
         required: true,
     },
-    path: {
-        type: String,
-        required: true
-    }
 })
 const ProductModel = mongoose.model('takepic', productSchema);
 module.exports = ProductModel;
