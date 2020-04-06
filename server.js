@@ -50,9 +50,13 @@ app.get('/getimg', async (req,res)=>{
 
 app.get('/getpred/:id', async (req,res)=>{
     const id = req.params.id;
-    const product = await predModel.find({});
-    console.log('product',product);
+    const product = await predModel.findOne({'userid': id});
     res.send(product['class']);
+});
+
+app.get('/getpred/', async (req,res)=>{
+    const product = await predModel.find({});
+    res.send(product);
 });
 
 app.get('/', function(req,res){
