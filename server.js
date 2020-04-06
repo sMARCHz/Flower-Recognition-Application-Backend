@@ -37,6 +37,24 @@ app.post('/upimg', mulConfig.uploadImg, async (req, res) => {
     }
 });
 
+app.post('/uppred',async (req,res) => {
+    const item = new predModel({
+        userid: req.body.uid,
+        class: req.body.class
+    });
+    console.log('id',req.body.uid);
+    try{
+        await item.save();
+    }
+    catch(err){
+        res.status(500).send(err);
+    }
+    finally{
+        console.log('Upload successful');
+        return res.sendStatus(201).end();
+    }
+})
+
 app.get('/getimg/:id', async (req,res)=>{
     const id = req.params.id;
     const product = await dbModel.findOne({'userid': id});
