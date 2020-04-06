@@ -55,8 +55,8 @@ app.get('/getpred/:id', async (req,res)=>{
 });
 
 app.get('/getpred/', async (req,res)=>{
-    const product = await predModel.find({});
-    res.send(product);
+    const all = await predModel.find({});
+    res.send(all);
 });
 
 app.get('/', function(req,res){

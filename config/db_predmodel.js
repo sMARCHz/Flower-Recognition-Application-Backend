@@ -8,7 +8,6 @@ const predictSchema = new Schema({
     },
     class: {
         type: String,
-        trim: true,
         required: true,
         lowercase: true
     }
