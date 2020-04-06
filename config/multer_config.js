@@ -23,5 +23,5 @@ const upload = multer({
 });
 
 module.exports = {
-    uploadImg: upload.single('file')
+    uploadImg: upload.single('image')
 }
