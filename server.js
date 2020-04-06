@@ -27,8 +27,8 @@ app.post('/upimg', mulConfig.uploadImg, (req, res) => {
     return res.sendStatus(200).end();
 });
 
-app.get('/test', function(req,res){
-    res.send('Online\nHello World');
+app.get('/', function(req,res){
+    res.send('Online NOW!!');
 });
 
 app.listen(port, function() {
