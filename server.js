@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mulConfig = require('./config/multer_config');
 const connectDB = require("./config/db_config");
 const dbModel = require('./config/db_model');
+const predModel = require('./config/db_predmodel');
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -49,7 +50,7 @@ app.get('/getimg', async (req,res)=>{
 
 app.get('/getpred/:id', async (req,res)=>{
     const id = req.params.id;
-    const product = await dbModel.findOne({'userid': id});
+    const product = await predModel.findOne({'userid': id});
     res.send(product);
 });
 
