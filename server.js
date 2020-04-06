@@ -24,7 +24,7 @@ app.post('/upimg', mulConfig.uploadImg, async (req, res) => {
     try{
         item.img.data = req.file.buffer;
         item.img.contentType = "image/jpg";
-        item.img.uri = '/public/Image-'+ Date.now() + req.body.filename;
+        item.img.uri = '/public/Image-'+ Date.now() + '-' + req.body.filename;
         await item.save();
     }
     catch(err){
@@ -45,6 +45,12 @@ app.get('/getimg/:id', async (req,res)=>{
 app.get('/getimg', async (req,res)=>{
     const all = await dbModel.find({});
     res.send(all);
+});
+
+app.get('/getpred/:id', async (req,res)=>{
+    const id = req.params.id;
+    const product = await dbModel.findOne({'userid': id});
+    res.send(product['class']);
 });
 
 app.get('/', function(req,res){
