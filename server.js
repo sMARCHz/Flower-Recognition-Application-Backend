@@ -52,7 +52,7 @@ app.get('/getpred/:id', async (req,res)=>{
     const id = req.params.id;
     const product = await predModel.findOne({'userid': id});
     console.log('product',product);
-    res.send(product[]);
+    res.send(product['class']);
 });
 
 app.get('/', function(req,res){
