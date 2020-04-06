@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const fs = require("fs");
 const mulConfig = require('./config/multer_config');
 const connectDB = require("./config/db_config");
 const dbModel = require('./config/db_model');
