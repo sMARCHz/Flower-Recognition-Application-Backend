@@ -20,14 +20,13 @@ app.post('/upimg', mulConfig.uploadImg, async (req, res) => {
     }
     const item = new dbModel({
         userid: req.body.uid,
-        path: req.body.uri
+        path: req.file.path
     });
     item.img.data = req.file.buffer;
     item.img.contentType = "image/jpg";
-    const id = req.body.uid;
-    const imgpath = req.body.uri;
-    console.log('path',imgpath);
-    console.log('id',id);
+
+    console.log('path',req.file.path);
+    console.log('id',req.body.uid);
     try{
         await item.save();
     }
@@ -44,7 +43,7 @@ app.get('/getimg', async (req,res)=>{
     //const {id} = req.params.id;
     const product = await dbModel.find({});
     try{
-        res.send(product);
+        res.send(product[img][path]);
     }
     catch(err){
         res.status(500).send(err)
