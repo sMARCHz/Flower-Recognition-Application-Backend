@@ -10,6 +10,6 @@ const productSchema = new Schema({
         required: true,
     },
 })
-const ProductModel = mongoose.model('takepic', productSchema);
+const ProductModel = mongoose.model('takepics', productSchema);
 module.exports = ProductModel;
 //mongodb+srv://sMARTz:<password>@flower1-b6hxe.mongodb.net/test?retryWrites=true&w=majority
