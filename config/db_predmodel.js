@@ -10,5 +10,5 @@ const predictSchema = new Schema({
         required: true,
     },
 })
-const PredictModel = mongoose.model('takepic', predictSchema);
+const PredictModel = mongoose.model('prediction', predictSchema);
 module.exports = PredictModel;
