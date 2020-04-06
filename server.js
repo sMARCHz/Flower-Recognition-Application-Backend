@@ -1,13 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mulConfig = require('./config/multer_config');
-const connectDB = require("./config/db_config");
-const Model = require('./config/db_model');
+/*const connectDB = require("./config/db_config");
+const Model = require('./config/db_model');*/
 const app = express();
 const port = process.env.PORT || 5000;
 
-const item = new Model.DBmodel();
-connectDB();
+/*const item = new Model.DBmodel();
+connectDB();*/
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -20,7 +20,7 @@ app.post('/upimg', mulConfig.uploadImg, (req, res) => {
     }
     const id = req.body.userid;
     const imgpath = req.body.path;
-    console.log('data',item.img.data);
+    //console.log('data',item.img.data);
     console.log('path',imgpath);
     console.log('id',id);
     console.log('Upload successful');
