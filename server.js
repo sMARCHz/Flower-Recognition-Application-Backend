@@ -38,9 +38,9 @@ app.post('/upimg', mulConfig.uploadImg, async (req, res) => {
     }
 });
 
-app.get('/getimg', async (req,res)=>{
-    //const {id} = req.params.id;
-    const product = await dbModel.find({'userid': 4});
+app.get('/getimg/:id', async (req,res)=>{
+    const {id} = req.params.id;
+    const product = await dbModel.find({'userid': id});
     try{
         res.json(product);
         //res.send(product[0]['path']);
