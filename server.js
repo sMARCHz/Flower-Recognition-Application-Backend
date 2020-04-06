@@ -6,14 +6,6 @@ const dbModel = require('./config/db_model');
 const app = express();
 const port = process.env.PORT || 5000;
 
-const test = {
-    img: {
-        data: 'asdfadf',
-        contentType: 'image/jpg'
-    },
-    path: ';kj;j;kkj'
-}
-
 connectDB();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -50,8 +42,7 @@ app.get('/getimg', async (req,res)=>{
     //const {id} = req.params.id;
     const product = await dbModel.find({});
     try{
-        //res.send(product[img]);
-        res.send(test['path']);
+        res.send(product['path']);
     }
     catch(err){
         res.status(500).send(err)
