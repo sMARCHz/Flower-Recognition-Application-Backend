@@ -20,6 +20,9 @@ app.post('/upimg', mulConfig.uploadImg, (req, res) => {
     }
     const id = req.body.userid;
     const imgpath = req.body.path;
+    /*item.img.data = req.body.file;
+    item.img.contentType = 'image/jpg'
+    item.save();*/
     //console.log('data',item.img.data);
     console.log('path',imgpath);
     console.log('id',id);
