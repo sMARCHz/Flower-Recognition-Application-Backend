@@ -22,7 +22,6 @@ app.post('/upimg', mulConfig.uploadImg, async (req, res) => {
         userid: req.body.uid,
         path: req.body.uri
     });
-    //item.img.data = fs.readFileSync(req.file.path);
     item.img.data = req.file.buffer;
     item.img.contentType = "image/jpg";
     const id = req.body.uid;
@@ -40,6 +39,12 @@ app.post('/upimg', mulConfig.uploadImg, async (req, res) => {
         return res.sendStatus(201).end();
     }
 });
+
+app.get('/getimg/:id', async (req,res)=>{
+    const {id} = req.params.id;
+    const product = await dbModel.find({userid:id});
+    res.json(product);
+})
 
 app.get('/', function(req,res){
     res.send('Online NOW!!');

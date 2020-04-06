@@ -8,7 +8,6 @@ const productSchema = new Schema({
         type: Number,
         trim: true,
         required: true,
-        lowercase: true
     },
     path: {
         type: String,
