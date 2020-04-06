@@ -1,17 +1,17 @@
 const multer = require('multer');
 const path = require('path');
 //const upload = multer({ dest: 'uploads/' })
-const diskStorageToUploads = multer.diskStorage({
+/*const diskStorageToUploads = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, '/public')
     },
     filename: (req, file, cb) => {
         cb(null, 'Image-'+ Date.now() + file.originalname)
     }
-});
+});*/
 
 const upload = multer({
-    storage: diskStorageToUploads,
+    storage: multer.memoryStorage(),
     fileFilter: (req,res,cb)=>{
         const ext = path.extname(res.originalname);
         if(ext != '.jpg'){

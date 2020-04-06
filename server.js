@@ -15,20 +15,25 @@ app.use(bodyParser.urlencoded({
 app.post('/upimg', mulConfig.uploadImg, async (req, res) => {
     if(!req.file){
         res.status(400).send('Error: No such file');
+        return;
     }
+    const item = new dbModel(req.body);
+    item.img.data = req.file.image.buffer;
+    item.img.contentType = "image/jpg";
     const id = req.body.userid;
     const imgpath = req.body.path;
-    const item = new dbModel(req.body);
+    console.log('path',imgpath);
+    console.log('id',id);
     try{
         await item.save();
     }
     catch(err){
         res.status(500).send(err);
     }
-    console.log('path',imgpath);
-    console.log('id',id);
-    console.log('Upload successful');
-    return res.sendStatus(201).end();
+    finally{
+        console.log('Upload successful');
+        return res.sendStatus(201).end();
+    }
 });
 
 app.get('/', function(req,res){
