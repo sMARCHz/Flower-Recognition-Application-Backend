@@ -20,12 +20,11 @@ app.post('/upimg', mulConfig.uploadImg, async (req, res) => {
     const item = new dbModel({
         userid: req.body.uid,
     });
-    item.img.data = req.file.buffer;
-    item.img.contentType = "image/jpg";
-    item.img.uri = '/public/Image-'+ Date.now() + req.body.filename;
-    //console.log('filename',req.file.filename);
     console.log('id',req.body.uid);
     try{
+        item.img.data = req.file.buffer;
+        item.img.contentType = "image/jpg";
+        item.img.uri = '/public/Image-'+ Date.now() + req.body.filename;
         await item.save();
     }
     catch(err){
