@@ -3,7 +3,6 @@ const Schema = mongoose.Schema
 const predictSchema = new Schema({
     userid: {
         type: Number,
-        trim: true,
         required: true,
     },
     class: {
