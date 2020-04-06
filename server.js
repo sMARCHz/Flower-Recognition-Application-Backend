@@ -43,8 +43,8 @@ app.get('/getimg/:id', async (req,res)=>{
     const product = await dbModel.findOne({'userid': id});
     const all = await dbModel.find();
     try{
-        res.json(product);
-        res.json(all);
+        res.send('product',product);
+        res.send(all);
         //res.send(product[0]['path']);
     }
     catch(err){
