@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 const predictSchema = new Schema({
     userid: {
-        type: Number,
+        type: String,
         required: true,
     },
     class: {

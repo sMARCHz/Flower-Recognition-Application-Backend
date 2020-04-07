@@ -5,7 +5,7 @@ const productSchema = new Schema({
         data: Buffer, contentType: String, uri:  String
     },
     userid: {
-        type: Number,
+        type: String,
         trim: true,
         required: true,
     }
