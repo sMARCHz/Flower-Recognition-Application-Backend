@@ -24,7 +24,7 @@ app.post('/upimg', mulConfig.uploadImg, async (req, res) => {
     });
     console.log('id',req.body.uid);
     try{
-        item.img.data = fs.readFileSync(req.file.path);//req.file.buffer;
+        item.img.data = req.file.buffer//fs.readFileSync(req.file.path);
         item.img.contentType = "image/jpg";
         item.img.uri = req.body.uri;
         console.log('model');
