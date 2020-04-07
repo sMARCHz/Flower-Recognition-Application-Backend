@@ -59,8 +59,14 @@ app.post('/uppred',async (req,res) => {
 
 app.get('/getimg/:id', async (req,res)=>{
     const id = req.params.id;
-    const product = await dbModel.findOne({'userid': id});
-    res.send(product['img']['uri']);
+    try{
+        const product = await dbModel.findOne({'userid': id});
+        console.log('product',product)
+        res.send(product['img']['uri']);
+    }
+    catch(err){
+        res.status(500).send(err);
+    }
 });
 
 app.get('/getimg', async (req,res)=>{
