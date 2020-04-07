@@ -8,7 +8,7 @@ const productSchema = new Schema({
         type: Number,
         trim: true,
         required: true,
-    },
+    }
 })
 const ProductModel = mongoose.model('takepic', productSchema);
 module.exports = ProductModel;

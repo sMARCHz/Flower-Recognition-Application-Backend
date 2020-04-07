@@ -11,7 +11,7 @@ const diskStorageToUploads = multer.diskStorage({
 });
 
 const upload = multer({
-    storage: multer.memoryStorage(),
+    storage: diskStorageToUploads,//multer.memoryStorage(),
     fileFilter: (req,res,cb)=>{
         const ext = path.extname(res.originalname);
         if(ext != '.jpg'){

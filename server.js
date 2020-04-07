@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const fs = require("fs");
 const mulConfig = require('./config/multer_config');
 const connectDB = require("./config/db_config");
 const dbModel = require('./config/db_model');
@@ -23,7 +24,7 @@ app.post('/upimg', mulConfig.uploadImg, async (req, res) => {
     });
     console.log('id',req.body.uid);
     try{
-        item.img.data = req.file.buffer;
+        item.img.data = fs.readFileSync(req.file.path);;
         item.img.contentType = "image/jpg";
         item.img.uri = '/public/Image-'+ Date.now() + '-' + req.body.filename;
         await item.save();
