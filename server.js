@@ -55,13 +55,33 @@ app.get('/getimg', async (req,res)=>{ //get all image
 });
 
 //about blog
+app.post('/upblog', async (req,res)=>{
+    try{
+        const item = new BlogModel();
+        item = {
+            blogid: '2',
+            title: {
+                main: 'justin',
+                subtitle: 'beawer'
+            },
+            data: 'baby'
+        }
+        await item.save();
+    }
+    catch(err){
+        res.status(500).send('upload blog error');
+    }
+    finally{
+        res.status(201).send('upload successful');
+    }
+});
 app.get('/getblog', async (req,res)=>{ //get all blog some info
     try{
         const blog = await BlogModel.find({});
         res.send(blog['blogid'],blog['title']);
     }
     catch(err){
-        res.status(500).send(err);
+        res.status(500).send(err,'get blog error');
     }
 });
 app.get('/getblog/:id', async (req,res)=>{
