@@ -76,7 +76,11 @@ app.post('/upblog', async (req,res)=>{
 app.get('/getblog', async (req,res)=>{ //get all blog some info
     try{
         const blog = await BlogModel.find({});
-        res.send(blog['blogid'],blog['title']);
+        const item = {
+            blogid: blog['blogid'],
+            title: blog['title']
+        };
+        res.send(item);
     }
     catch(err){
         res.status(500).send('get blog error');
