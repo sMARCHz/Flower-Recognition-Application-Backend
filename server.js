@@ -74,17 +74,17 @@ app.post('/upblog', async (req,res)=>{
     }
 });
 app.get('/getblog', async (req,res)=>{ //get all blog some info
-    try{
+    //try{
         const blog = await BlogModel.find({},{fields: {data: 0}});
         const item = {
             blogid: blog['blogid'],
             title: blog['title']
         };
         res.send(blog);
-    }
+    /*}
     catch(err){
         res.status(500).send('get blog error');
-    }
+    }*/
 });
 app.get('/getblog/:id', async (req,res)=>{
     const blogid = req.params.id;
