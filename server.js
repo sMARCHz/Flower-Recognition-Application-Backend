@@ -56,8 +56,13 @@ app.get('/getimg', async (req,res)=>{ //get all image
 
 //about blog
 app.get('/getblog', async (req,res)=>{ //get all blog some info
-    const blog = await BlogModel.find({});
-    res.send(blog['blogid'],blog['title']);
+    try{
+        const blog = await BlogModel.find({});
+        res.send(blog['blogid'],blog['title']);
+    }
+    catch(err){
+        res.status(500).send(err);
+    }
 });
 app.get('/getblog/:id', async (req,res)=>{
     const blogid = req.params.id;

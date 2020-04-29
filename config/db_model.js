@@ -29,8 +29,7 @@ const blogSchema = new Schema({
         required: true
     },
     title: {
-        type: String,
-        required: true,
+        main: {type: String,required: true},
         subtitle: {type: String}
     },
     data: {
