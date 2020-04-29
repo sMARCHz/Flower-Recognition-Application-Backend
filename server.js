@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const fs = require("fs");
 const mulConfig = require('./config/multer_config');
 const connectDB = require("./config/db_config");
-const {ImgModel,PredictModel,BlogModel} = require('./config/db_model');
+const {ImgModel,PredictModel,BlogModel,FlowerModel} = require('./config/db_model');
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -50,12 +50,17 @@ app.get('/getimg/:id', async (req,res)=>{ //get image by id to display
     }
 });
 app.get('/getimg', async (req,res)=>{ //get all image
-    const all = await ImgModel.find({});
-    res.send(all);
+    try{
+        const all = await ImgModel.find({});
+        res.send(all);
+    }
+    catch(err){
+        res.status(500).send(err);
+    }
 });
 
 //about blog
-app.post('/upblog', async (req,res)=>{
+app.post('/upblog', async (req,res)=>{ //upload blog
     try{
         const item = new BlogModel();
         item.blogid = '2';
@@ -63,7 +68,7 @@ app.post('/upblog', async (req,res)=>{
             main: 'justin',
             subtitle: 'beawer'
         };
-        item.data = 'baby';
+        item.article = 'baby';
         await item.save();
     }
     catch(err){
@@ -73,20 +78,16 @@ app.post('/upblog', async (req,res)=>{
         res.status(201).send('upload successful');
     }
 });
-app.get('/getblog', async (req,res)=>{ //get all blog some info
-    //try{
-        const blog = await BlogModel.find({},{'data': 0});
-        const item = {
-            blogid: blog['blogid'],
-            title: blog['title']
-        };
+app.get('/getblog', async (req,res)=>{ //get all blog info exclude article
+    try{
+        const blog = await BlogModel.find({},{'article': 0});
         res.send(blog);
-    /*}
+    }
     catch(err){
         res.status(500).send('get blog error');
-    }*/
+    }
 });
-app.get('/getblog/:id', async (req,res)=>{
+app.get('/getblog/:id', async (req,res)=>{ //get blog that have matched id
     const blogid = req.params.id;
     try{
         const blog = await BlogModel.findOne({'blogid': blogid});
@@ -98,8 +99,29 @@ app.get('/getblog/:id', async (req,res)=>{
     }
 });
 
+//about flower data
+app.get('/getflower', async (req,res)=>{ //get all flower info exclude color and meaning
+    try{
+        const flower = await FlowerModel.find({},{result: {'color': 0, 'meaning': 0}});
+        res.send(flower);
+    }
+    catch(err){
+        res.status(500).send(err);
+    }
+})
+app.get('/getflower/:id', async (req,res)=>{ //get flower info that has matched id
+    const flowerid = req.params.id;
+    try{
+        const flower = await FlowerModel.findOne({'flowerid': flowerid});
+        res.send(flower);
+    }
+    catch(err){
+        res.status(500).send(err);
+    }
+})
+
 //about predict class
-app.post('/uppred',async (req,res) => { //write predictclass to db(not finished)
+/*app.post('/uppred',async (req,res) => { //write predictclass to db(not finished)
     const item = new PredictModel({
         userid: req.body.uid,
         class: req.body.class
@@ -124,7 +146,7 @@ app.get('/getpred/:id', async (req,res)=>{ //get predictclass by id(not finished
 app.get('/getpred', async (req,res)=>{ //get all predictclass(not finished)
     const all = await PredictModel.find({});
     res.send(all);
-});
+});*/
 
 app.get('/', function(req,res){ //test api online or not
     res.send('Online NOW!!');
