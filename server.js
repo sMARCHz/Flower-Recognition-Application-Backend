@@ -3,8 +3,7 @@ const bodyParser = require('body-parser');
 const fs = require("fs");
 const mulConfig = require('./config/multer_config');
 const connectDB = require("./config/db_config");
-const dbModel = require('./config/db_model');
-const predModel = require('./config/db_predmodel');
+const {ImgModel,PredictModel,BlogSchema} = require('./config/db_model');
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -14,12 +13,12 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.post('/upimg', mulConfig.uploadImg, async (req, res) => {
+app.post('/upimg', mulConfig.uploadImg, async (req, res) => { //upload image
     if(!req.file){
         res.status(400).send('Error: No such file');
         return;
     }
-    const item = new dbModel({
+    const item = new ImgModel({
         userid: req.body.uid,
     });
     console.log('id',req.body.uid);
@@ -39,8 +38,8 @@ app.post('/upimg', mulConfig.uploadImg, async (req, res) => {
     }
 });
 
-app.post('/uppred',async (req,res) => {
-    const item = new predModel({
+app.post('/uppred',async (req,res) => { //write predictclass to db(not finished)
+    const item = new PredictModel({
         userid: req.body.uid,
         class: req.body.class
     });
@@ -57,10 +56,10 @@ app.post('/uppred',async (req,res) => {
     }
 })
 
-app.get('/getimg/:id', async (req,res)=>{
+app.get('/getimg/:id', async (req,res)=>{ //get image by id to display
     const id = req.params.id;
     try{
-        const product = await dbModel.findOne({'userid': id});
+        const product = await ImgModel.findOne({'userid': id});
         console.log('product',product)
         res.send(product['img']['uri']);
     }
@@ -69,23 +68,23 @@ app.get('/getimg/:id', async (req,res)=>{
     }
 });
 
-app.get('/getimg', async (req,res)=>{
-    const all = await dbModel.find({});
+app.get('/getimg', async (req,res)=>{ //get all image
+    const all = await ImgModel.find({});
     res.send(all);
 });
 
-app.get('/getpred/:id', async (req,res)=>{
+app.get('/getpred/:id', async (req,res)=>{ //get predictclass by id(not finished)
     const id = req.params.id;
-    const product = await predModel.findOne({'userid': id});
+    const product = await PredictModel.findOne({'userid': id});
     res.send(product['class']);
 });
 
-app.get('/getpred', async (req,res)=>{
-    const all = await predModel.find({});
+app.get('/getpred', async (req,res)=>{ //get all predictclass(not finished)
+    const all = await PredictModel.find({});
     res.send(all);
 });
 
-app.get('/', function(req,res){
+app.get('/', function(req,res){ //test api online or not
     res.send('Online NOW!!');
 });
 
