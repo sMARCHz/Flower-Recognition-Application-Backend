@@ -79,7 +79,7 @@ app.get('/getblog', async (req,res)=>{ //get all blog some info
         res.send(blog['blogid'],blog['title']);
     }
     catch(err){
-        res.status(500).send(err,'get blog error');
+        res.status(500).send('get blog error');
     }
 });
 app.get('/getblog/:id', async (req,res)=>{
