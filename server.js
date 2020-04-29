@@ -75,12 +75,7 @@ app.post('/upblog', async (req,res)=>{
 });
 app.get('/getblog', async (req,res)=>{ //get all blog some info
     try{
-        const blog = await BlogModel.find({},{
-            fields: {
-                blogid: 1,
-                title: 1
-            }
-        })
+        const blog = await BlogModel.find({},{fields: {data: 0}});
         const item = {
             blogid: blog['blogid'],
             title: blog['title']
