@@ -80,7 +80,7 @@ app.get('/getblog', async (req,res)=>{ //get all blog some info
             blogid: blog['blogid'],
             title: blog['title']
         };
-        res.send(item);
+        res.send(blog);
     }
     catch(err){
         res.status(500).send('get blog error');
