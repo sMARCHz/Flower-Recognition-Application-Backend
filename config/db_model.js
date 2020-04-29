@@ -24,17 +24,23 @@ const predictSchema = new Schema({
 })
 
 const blogSchema = new Schema({
-    info: {
-        seed: {type: String},
-        result: {type: String},
-        page: {type: String},
-        version: {type: String}
+    blogid: {
+        type: String,
+        required: true
+    },
+    title: {
+        type: String,
+        required: true,
+        subtitle: {type: String}
+    },
+    data: {
+        type: String
     }
 })
 const ImgModel = mongoose.model('takepic', ImgSchema);
 const PredictModel = mongoose.model('prediction', predictSchema);
-const BlogSchema = mongoose.model('pageinfo', blogSchema);
+const BlogModel = mongoose.model('bloginfo', blogSchema);
 module.exports = {
-    ImgModel,PredictModel,BlogSchema
+    ImgModel,PredictModel,BlogModel
 };
 //mongodb+srv://sMARTz:<password>@flower1-b6hxe.mongodb.net/test?retryWrites=true&w=majority
