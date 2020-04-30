@@ -102,7 +102,7 @@ app.get('/getblog/:id', async (req,res)=>{ //get blog that have matched id
 //about flower data
 app.get('/getflower', async (req,res)=>{ //get all flower info exclude color and meaning
     try{
-        const flower = await FlowerModel.find({},{result: {'color': 0, 'meaning': 0}});
+        const flower = await FlowerModel.find({},{result: {'color': 0, 'meaning': 0, 'giving': 0}});
         res.send(flower);
     }
     catch(err){

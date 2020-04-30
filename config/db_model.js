@@ -53,6 +53,7 @@ const flowerSchema = new Schema({
             th: {type: String},
             en: {type: String}
         },
+        giving: {type: String},
         picture: {
             large: {type: String},
             medium: {type: String},
