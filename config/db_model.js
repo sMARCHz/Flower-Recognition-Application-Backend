@@ -8,6 +8,9 @@ const ImgSchema = new Schema({
         type: String,
         trim: true,
         required: true,
+    },
+    filename: {
+        type: String
     }
 })
 

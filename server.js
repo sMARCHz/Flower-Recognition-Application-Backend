@@ -21,6 +21,7 @@ app.post('/upimg', mulConfig.uploadImg, async (req, res) => { //upload image
     }
     const item = new ImgModel({
         userid: req.body.uid,
+        filename: req.body.filename
     });
     console.log('id',req.body.uid);
     try{
