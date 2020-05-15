@@ -18,18 +18,23 @@ app.post('/upimg', mulConfig.uploadImg, async (req, res) => { //upload image
         res.status(400).send('Error: No such file');
         return;
     }
-    //const product = ImgModel.findOne({'userid': req.body.uid});
     const item = new ImgModel({
         userid: req.body.uid,
         filename: req.body.filename
     });
     console.log('id',req.body.uid);
     try{
-        item.img.data = req.file.buffer //fs.readFileSync(req.file.path);
-        item.img.contentType = "image/jpg";
-        item.img.uri = req.body.uri;
-        console.log('model');
-        await item.save({userid: req.body.uid});
+        if(await ImgModel.findOneAndDelete({'userid': req.body.uid}))
+        {
+            console.log('delete old');
+        }
+        else{
+            item.img.data = req.file.buffer //fs.readFileSync(req.file.path);
+            item.img.contentType = "image/jpg";
+            item.img.uri = req.body.uri;
+            console.log('model');
+            await item.save();
+        }
     }
     catch(err){
         res.status(500).send(err);
