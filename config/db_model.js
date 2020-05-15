@@ -63,9 +63,9 @@ const flowerSchema = new Schema({
         },
         giving: {type: String},
         picture: {
-            large: {type: String},
-            medium: {type: String},
-            thumbnail: {type: String}
+            large: {data: Buffer, contentType: String, uri: String},
+            medium: {data: Buffer, contentType: String, uri: String},
+            thumbnail: {data: Buffer, contentType: String, uri: String}
         }
     },
     info: {

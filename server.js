@@ -108,6 +108,39 @@ app.get('/getblog/:id', async (req,res)=>{ //get blog that have matched id
 });
 
 //about flower data
+app.post('/upflower', mulConfig.uploadImg, async (req,res)=>{
+    try{
+        const item = new BlogModel({
+            result:{
+                flowerid: req.body.flowerid,
+                name: {
+                    th: req.body.thn,
+                    en: req.body.enn,
+                    sci: req.body.sci
+                },
+                color: req.body.color,
+                meaning: req.body.meaning,
+                giving: req.body.giving,
+            },
+            info:{
+                seed: req.body.seed,
+                results: req.body.result,
+                page: req.body.page,
+                version: req.body.version
+            }
+        });
+        item.result.picture.large.data = req.file.buffer;
+        item.result.picture.large.contentType = "image/jpg";
+        item.result.picture.large.uri = req.body.uri;
+        await item.save();
+    }
+    catch(err){
+        res.status(500).send('upload blog error');
+    }
+    finally{
+        res.status(201).send('upload successful');
+    }  
+});
 app.get('/getflower', async (req,res)=>{ //get all flower info exclude color and meaning
     try{
         const flower = await FlowerModel.find({},{result: {'color': 0, 'meaning': 0, 'giving': 0}});
