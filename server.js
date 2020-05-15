@@ -64,7 +64,7 @@ app.get('/getimg', async (req,res)=>{ //get all image
 });
 
 //about blog
-app.post('/upblog', async (req,res)=>{ //upload blog
+app.post('/upblog', mulConfig.uploadImg, async (req,res)=>{ //upload blog
     try{
         const item = new BlogModel({
             blogid: req.body.blogid,
@@ -74,9 +74,9 @@ app.post('/upblog', async (req,res)=>{ //upload blog
             },
             article: req.body.article
         });
-        item.image.data = req.file.buffer;
-        item.image.contentType = "image/jpg";
-        item.image.uri = req.body.uri;
+        item.img.data = req.file.buffer;
+        item.img.contentType = "image/jpg";
+        item.img.uri = req.body.uri;
         await item.save();
     }
     catch(err){
