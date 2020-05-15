@@ -24,12 +24,11 @@ app.post('/upimg', mulConfig.uploadImg, async (req, res) => { //upload image
     });
     console.log('id',req.body.uid);
     try{
-        const product = ImgModel.findByIdAndDelete({'userid': id})
         item.img.data = req.file.buffer //fs.readFileSync(req.file.path);
         item.img.contentType = "image/jpg";
         item.img.uri = req.body.uri;
         console.log('model');
-        await item.save();
+        await item.save({'userid': req.body.id});
     }
     catch(err){
         res.status(500).send(err);
