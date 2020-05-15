@@ -67,12 +67,12 @@ app.get('/getimg', async (req,res)=>{ //get all image
 app.post('/upblog', async (req,res)=>{ //upload blog
     try{
         const item = new BlogModel();
-        item.blogid = '2';
+        item.blogid = req.body.blogid;
         item.title = {
-            main: 'justin',
-            subtitle: 'beawer'
+            main: req.body.main,
+            subtitle: req.body.subtitle
         };
-        item.article = 'baby';
+        item.article = req.body.article;
         await item.save();
     }
     catch(err){
