@@ -66,13 +66,14 @@ app.get('/getimg', async (req,res)=>{ //get all image
 //about blog
 app.post('/upblog', async (req,res)=>{ //upload blog
     try{
-        const item = new BlogModel();
-        item.blogid = req.body.blogid;
-        item.title = {
-            main: req.body.main,
-            subtitle: req.body.subtitle
-        };
-        item.article = req.body.article;
+        const item = new BlogModel({
+            blogid: req.body.blogid,
+            title: {
+                main: req.body.main,
+                subtitle: req.body.subtitle
+            },
+            article: req.body.article
+        });
         item.image.data = req.file.buffer;
         item.image.contentType = "image/jpg";
         item.image.uri = req.body.uri;
