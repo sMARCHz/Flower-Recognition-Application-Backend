@@ -28,7 +28,7 @@ app.post('/upimg', mulConfig.uploadImg, async (req, res) => { //upload image
         item.img.contentType = "image/jpg";
         item.img.uri = req.body.uri;
         console.log('model');
-        await item.save({'userid': req.body.id});
+        await item.save({userid: req.body.id});
     }
     catch(err){
         res.status(500).send(err);
