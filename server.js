@@ -73,6 +73,9 @@ app.post('/upblog', async (req,res)=>{ //upload blog
             subtitle: req.body.subtitle
         };
         item.article = req.body.article;
+        item.image.data = req.file.buffer;
+        item.image.contentType = "image/jpg";
+        item.image.uri = req.body.uri;
         await item.save();
     }
     catch(err){
